@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Prism — Translation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-mark">
+        <div class="prism-shape"></div>
+      </div>
+      <span class="logo-name">Prism</span>
+    </div>
+
+    <nav class="header-nav">
+      <span class="nav-tagline">language, without borders</span>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">○</span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="rule-top"></div>
+
+  <main class="main">
+
+    <div class="headline-block">
+      <p class="kicker">Translation</p>
+      <h1 class="headline">
+        Every word,<br /><em>perfectly rendered.</em>
+      </h1>
+    </div>
+
+    <div class="translator">
+
+      <!-- Language row -->
+      <div class="lang-row">
+        <div class="lang-left">
+          <div class="select-wrap">
+            <select id="detectSelect" class="sel sel--detect" title="Detection mode">
+              <option value="detect">Auto-detect</option>
+              <option value="manual">Manual</option>
+            </select>
+            <span class="sel-arrow">↓</span>
+          </div>
+          <div class="select-wrap">
+            <select id="sourceLang" class="sel" title="Source language">
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="zh">Chinese</option>
+              <option value="ja">Japanese</option>
+              <option value="ar">Arabic</option>
+              <option value="ko">Korean</option>
+              <option value="hi">Hindi</option>
+            </select>
+            <span class="sel-arrow">↓</span>
+          </div>
+        </div>
+
+        <button class="swap-btn" id="switchBtn" title="Swap languages" aria-label="Swap languages">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
+          </svg>
+        </button>
+
+        <div class="lang-right">
+          <div class="select-wrap">
+            <select id="targetLang" class="sel" title="Target language">
+              <option value="fr">French</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="zh">Chinese</option>
+              <option value="ja">Japanese</option>
+              <option value="ar">Arabic</option>
+              <option value="ko">Korean</option>
+              <option value="hi">Hindi</option>
+            </select>
+            <span class="sel-arrow">↓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-mid"></div>
+
+      <!-- Text panels -->
+      <div class="panels">
+
+        <div class="panel panel--input">
+          <span class="panel-label">Source</span>
+          <textarea
+            id="inputText"
+            class="panel-textarea"
+            placeholder="Begin typing…"
+            maxlength="500"
+            spellcheck="true"
+          >Hello, how are you</textarea>
+          <div class="panel-bar">
+            <div class="bar-actions">
+              <button class="bar-btn" id="listenInput">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Listen
+              </button>
+              <button class="bar-btn" id="copyInput">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <span class="char-count" id="charCount">18 / 500</span>
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel panel--output">
+          <span class="panel-label">Translation</span>
+          <div class="panel-output" id="outputBox">
+            <span class="output-empty" id="outputEmpty">Awaiting translation…</span>
+            <span class="output-text" id="outputText"></span>
+          </div>
+          <div class="loading-strip" id="loadingStrip"></div>
+          <div class="panel-bar">
+            <div class="bar-actions">
+              <button class="bar-btn" id="listenOutput">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Listen
+              </button>
+              <button class="bar-btn" id="copyOutput">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="rule-mid"></div>
+
+      <!-- Footer row -->
+      <div class="action-row">
+        <p class="error-line" id="errorLine"></p>
+        <div class="action-right">
+          <span class="debounce-label">Live · 600ms</span>
+          <button class="translate-btn" id="translateBtn">
+            <span class="t-label" id="tLabel">Translate</span>
+            <span class="t-spinner" id="tSpinner">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            </span>
+            <svg class="t-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="rule-top" style="margin-top:auto"></div>
+
+  <footer class="site-footer">
+    <span>© 2026 Prism</span>
+    <span class="footer-dot">·</span>
+    <span>Powered by MyMemory</span>
+    <span class="footer-dot">·</span>
+    <span>Full Stack Development Assignment</span>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
